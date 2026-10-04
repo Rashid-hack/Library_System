@@ -13,6 +13,4 @@ public interface BookRepository {
     Book saveOrUpdate(Book book);
 
     boolean deleteById(int id);
-
-    int getNewId();
 }

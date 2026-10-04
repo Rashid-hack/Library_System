@@ -29,9 +29,8 @@ public class BookService {
         String cleanTitle = validateAndTrimText(title, "Kitabin adi bos ola bilmez!");
         String cleanAuthor = validateAndTrimText(author, "Muellifin adi bos ola bilmez!");
 
-        int newId = repo.getNewId();
 
-        Book newBook = new Book(newId, cleanTitle, cleanAuthor, price);
+        Book newBook = new Book(cleanTitle, cleanAuthor, price);
         return repo.saveOrUpdate(newBook);
     }
 

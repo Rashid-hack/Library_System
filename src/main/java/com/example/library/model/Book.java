@@ -13,6 +13,10 @@ public class Book {
         this.price = price;
     }
 
+    public Book(String title, String author, double price){
+        this(0, title, author, price);
+    }
+
     public int getId() {
         return id;
     }

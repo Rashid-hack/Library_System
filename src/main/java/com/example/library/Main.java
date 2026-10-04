@@ -1,7 +1,9 @@
 package com.example.library;
 
 import com.example.library.model.Book;
+import com.example.library.repository.BookRepository;
 import com.example.library.repository.InMemoryBookRepository;
+import com.example.library.repository.JdbcBookRepository;
 import com.example.library.service.BookService;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        InMemoryBookRepository repo = new InMemoryBookRepository();
+        BookRepository repo = new JdbcBookRepository("jdbc:h2:./data/library");
         BookService bookService = new BookService(repo);
         Scanner sc = new Scanner(System.in);
 

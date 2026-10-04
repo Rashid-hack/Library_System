@@ -12,14 +12,12 @@ public class InMemoryBookRepository implements BookRepository{
    private final Map<Integer, Book> bookDatabase = new LinkedHashMap<>();
 
     @Override
-    public int getNewId() {
-        return ++nextId;
-    }
-
-    @Override
     public Book saveOrUpdate(Book book) {
-        if (book == null || book.getId() ==0){
-            throw new IllegalArgumentException("Kitab null ve ya Id-siz ola bilmez!");
+        if (book == null) {
+            throw new IllegalArgumentException("Kitab null ola bilmez!");
+        }
+        if (book.getId() == 0) {
+            book = new Book(++nextId, book.getTitle(), book.getAuthor(), book.getPrice());
         }
         bookDatabase.put(book.getId(), book);
         return book;
