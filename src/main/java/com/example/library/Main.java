@@ -4,6 +4,7 @@ import com.example.library.model.Book;
 import com.example.library.repository.BookRepository;
 import com.example.library.repository.InMemoryBookRepository;
 import com.example.library.repository.JdbcBookRepository;
+import com.example.library.repository.JooqBookRepository;
 import com.example.library.service.BookService;
 
 import java.util.List;
@@ -11,7 +12,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        BookRepository repo = new JdbcBookRepository("jdbc:h2:./data/library");
+        System.setProperty("org.jooq.no-logo", "true");
+        System.setProperty("org.jooq.no-tips", "true");
+        BookRepository repo = new JooqBookRepository("jdbc:h2:./data/library");
         BookService bookService = new BookService(repo);
         Scanner sc = new Scanner(System.in);
 

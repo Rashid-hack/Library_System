@@ -10,6 +10,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
+    implementation 'org.jooq:jooq:3.19.29'
     runtimeOnly 'com.h2database:h2:2.3.232'
 }
 
