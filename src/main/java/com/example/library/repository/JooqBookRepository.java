@@ -22,24 +22,35 @@ public class JooqBookRepository implements BookRepository{
     private static final Field<Double> PRICE = field("price", Double.class);
 
     private final String url;
+    private final String username;
+    private final String password;
 
     public JooqBookRepository(String url){
+        this(url, null, null);
+    }
+
+    public JooqBookRepository(String url, String username, String password) {
         this.url = url;
+        this.username = username;
+        this.password = password;
         createTable();
     }
 
     private CloseableDSLContext open(){
-        return DSL.using(url);
+        if (username == null){
+            return DSL.using(url);
+        }
+        return DSL.using(url, username, password);
     }
 
     private void createTable(){
         try(CloseableDSLContext ctx = open()){
             ctx.execute("""
                     CREATE TABLE IF NOT EXISTS books(
-                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                     title VARCHAR(255) NOT NULL,
                     author VARCHAR(255) NOT NULL,
-                    price DOUBLE NOT NULL
+                    price DOUBLE PRECISION NOT NULL
                     )
                     """);
         }
