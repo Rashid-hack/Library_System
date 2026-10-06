@@ -1,17 +1,18 @@
 plugins {
     id 'java'
-    id 'application'
+    id 'org.springframework.boot' version '4.0.8'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'org.example'
 version = '1.0-SNAPSHOT'
 
+// Spring Boot ozu versiya secir. Biz bizimkini mecbur edirik.
+ext['jooq.version'] = '3.19.29'
+ext['h2.version'] = '2.3.232'
+
 repositories {
     mavenCentral()
-}
-dependencies {
-    implementation 'org.jooq:jooq:3.19.29'
-    runtimeOnly 'com.h2database:h2:2.3.232'
 }
 
 java {
@@ -20,14 +21,16 @@ java {
     }
 }
 
-application {
-    mainClass = 'com.example.library.Main'
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.jooq:jooq:3.19.29'
+    runtimeOnly 'com.h2database:h2:2.3.232'
+}
+
+springBoot {
+    mainClass = 'com.example.library.LibraryApplication'
 }
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-}
-
-run {
-    standardInput = System.in
 }
