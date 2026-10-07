@@ -1,4 +1,4 @@
-package com.example.library.configi;
+package com.example.library.config;
 
 import com.example.library.repository.BookRepository;
 import com.example.library.repository.JooqBookRepository;
